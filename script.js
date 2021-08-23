@@ -15,6 +15,8 @@ const messageParagraph = document.getElementById("message");
  * @param val 
  */
 function playerClick(element, playerWeapon) {
+    if (numberOfClicks === NUMBER_OF_ROUNDS)
+        return;
     numberOfClicks++;
 
     if (playerSelection)
@@ -28,7 +30,7 @@ function playerClick(element, playerWeapon) {
     changeBackgroundColor(getComputerButton(), COMPUTER_COLOR);
 
     updateScoreAndMessage(playRound());
-    
+
     checkIfGameOver();
 }
 
@@ -36,7 +38,7 @@ function playerClick(element, playerWeapon) {
  * Function that gives a random weapon choice for the computer
  * @returns the weapon chosen by the computer
  */
- function computerPlay() {
+function computerPlay() {
     number = Math.floor(3 * Math.random());
     if (number === 0)
         return "Rock";
@@ -77,7 +79,7 @@ function playRound() {
  * Updates the score and message displayed for the user after a round is played
  * @param roundResult is a win, draw or lose message
  */
-function updateScoreAndMessage(roundResult){
+function updateScoreAndMessage(roundResult) {
     messageParagraph.textContent = roundResult;
     switch (roundResult.substring(0, 5)) {
         case "You L": computerScore = computerScore + 1; messageParagraph.style.color = "coral"; break;
@@ -93,17 +95,17 @@ function updateScoreAndMessage(roundResult){
  */
 function checkIfGameOver() {
     if (numberOfClicks !== NUMBER_OF_ROUNDS) {
-    return;
+        return;
     }
-        if (playerScore < computerScore){
-            alert("Computer Wins");
-        }
-        else if (playerScore === computerScore){
-            alert("It's a Draw");
-        }
-        else{ 
+    if (playerScore < computerScore) {
+        alert("Computer Wins");
+    }
+    else if (playerScore === computerScore) {
+        alert("It's a Draw");
+    }
+    else {
         alert("You Win");
-        }
+    }
 
 }
 
